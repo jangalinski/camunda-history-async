@@ -24,7 +24,7 @@ public class CamundaHistoryAsyncApplication {
         SpringApplication.run(CamundaHistoryAsyncApplication.class, args);
     }
 
-    @Bean
+  //  @Bean
     public DbHistoryEventHandler dbHistoryEventHandler(@Lazy ProcessEngineConfigurationImpl configuration) {
         var setContext = new Command<Void>() {
 
@@ -50,8 +50,8 @@ public class CamundaHistoryAsyncApplication {
     }
 
     @Bean
-    public AsyncHistoryEventHandler asyncHistoryEventHandler(ApplicationEventPublisher publisher, DbHistoryEventHandler dbHistoryEventHandler) {
-        return new AsyncHistoryEventHandler(publisher, dbHistoryEventHandler);
+    public AsyncHistoryEventHandler asyncHistoryEventHandler(ApplicationEventPublisher publisher) {
+        return new AsyncHistoryEventHandler(publisher, new DbHistoryEventHandler());
     }
 
     @Bean
