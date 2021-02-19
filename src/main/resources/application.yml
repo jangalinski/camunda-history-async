@@ -1,0 +1,25 @@
+camunda:
+  bpm:
+    admin-user:
+      id: admin
+    filter:
+      create: All
+    history-level: FULL
+spring:
+  h2:
+    console:
+      enabled: true
+  application:
+    name: camunda-history-async
+  datasource:
+    url: "jdbc:h2:mem:${spring.application.name}"
+    driverClassName: org.h2.Driver
+    username: "sa"
+    password: "sa"
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    generate-ddl: false
+    hibernate.ddl-auto: none
+    show-sql: false
+    open-in-view: true
+
