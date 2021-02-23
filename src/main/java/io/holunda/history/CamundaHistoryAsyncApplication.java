@@ -9,9 +9,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+
+import java.util.concurrent.Executor;
 
 @SpringBootApplication
 @ProcessApplication
+@EnableAsync
 public class CamundaHistoryAsyncApplication {
 
     public static void main(String[] args) {
@@ -42,6 +47,15 @@ public class CamundaHistoryAsyncApplication {
                 return "disableTelemetry";
             }
         };
+    }
+
+    @Bean(name = "asyncHistoryEventExecutor")
+    public Executor getAsyncExecutor() {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setMaxPoolSize(100);
+        executor.setThreadNamePrefix("HistoryEvent-");
+        executor.initialize();
+        return executor;
     }
 
 }

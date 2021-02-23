@@ -22,4 +22,6 @@ spring:
     hibernate.ddl-auto: none
     show-sql: false
     open-in-view: true
-
+logging:
+  level:
+    io.holunda.history: debug
